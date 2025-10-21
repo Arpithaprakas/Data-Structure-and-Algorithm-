@@ -85,8 +85,17 @@ public:
         head = head->next;
     }
 
-    void deleteAtPos(int val,int pos){
-        
+    void deleteAtPos(int val){
+        if(head->next == NULL){
+            deleteAtHead();
+        }
+        Node * temp = head;
+        while(temp->next->data != val){
+            temp=temp->next;
+        }
+        Node * todelete = temp->next;
+        temp->next = temp->next->next;
+        delete todelete;
     }
 
     void display()
@@ -106,6 +115,8 @@ int main()
     LinkedList ll;
     ll.insertAtHead(10);
     ll.insertAtHead(30);
+    ll.insertAtHead(40);
+    ll.insertAtHead(50);
     ll.display();
     ll.insertAtTail(500);
     ll.display();
@@ -114,6 +125,8 @@ int main()
     ll.insertAtpos(102,2);
     ll.display();
     ll.deleteAtHead();
+    ll.display();
+    ll.deleteAtPos(10);
     ll.display();
 
     return 0;
