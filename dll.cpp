@@ -91,9 +91,51 @@ public:
         }
     }
 
-    // void deleteAtHead(){}
+    void deleteAtHead()
+    {
+        if (head == NULL)
+        {
+            cout << "Nothing to delete";
+            return;
+        }
+        Node *temp = head;
+        head = head->next;
+        if (head != NULL)
+        {
+            head->prev = NULL;
+        }
+        delete temp;
+    }
 
-    // void deletion(int val){}
+    void deletion(int val)
+    {
+        Node *temp = head;
+        if (temp->data != val)
+        {
+            temp = temp->next;
+        }
+        if (temp == NULL)
+        {
+            cout << "Value not found" << endl;
+            return;
+        }
+
+        if (temp->prev != NULL)
+        {
+            temp->prev->next = temp->next;
+        }
+
+        if (temp->next != NULL)
+        {
+            temp->next->prev = temp->prev;
+        }
+
+        if (temp == head)
+        {
+            head = head->next;
+        }
+        delete temp;
+    }
 
     void display()
     {
@@ -119,6 +161,10 @@ int main()
     dll.insertAtTail(11);
     dll.display();
     dll.insertAtPos(100, 3);
+    dll.display();
+    dll.deleteAtHead();
+    dll.display();
+    dll.deletion(1);
     dll.display();
     return 0;
 }
